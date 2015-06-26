@@ -1,9 +1,9 @@
-Code source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms
-
-http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2
 
 Récapitulatif des points important.
 ====
+Code source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
+http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2   
+
 
 ** Vider le cache avec la console **
 ----
