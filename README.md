@@ -4,7 +4,7 @@ http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-sy
 
 Récapitulatif des points important.
 
-** Vider le cache avec la console **
+** Vider le cache avec la console ** \n
 php app/console cache:clear --env=prod.
 
 ** Bundle **
