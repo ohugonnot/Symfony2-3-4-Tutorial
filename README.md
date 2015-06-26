@@ -8,7 +8,8 @@ Récapitulatif des points important.
 ** Vider le cache avec la console **
 ----
 
-	php app/console cache:clear --env=prod
+	php app/console cache:clear --env=prod  (pour l'environnement de prod)
+	php app/console cache:clear 
 
 ** Bundle ** 
 ----
@@ -29,9 +30,9 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 
 ** Controller ** 
 ----
-http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Request.html 
-http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html
-http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html
+http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Request.html   
+http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html           
+http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html   
 
 	$this->render('BundleName:Controller:methode.html.twig', array('key' => $val))          
 	$contenu = $this->renderView() recuper le contenu      
@@ -60,7 +61,7 @@ http://twig.sensiolabs.org/doc/filters/index.html
 
 ** Service **
 -----
-http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-dependances-en-php
+http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-dependances-en-php   
 
 - Un service est une simple classe associée à une certaine configuration.
 - Le conteneur de services organise et instancie tous vos services, grâce à leur configuration.
@@ -69,10 +70,10 @@ http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-depen
 
 ** Doctrine ORM, Base de données **
 ----
-http://symfony.com/doc/master/book/doctrine.html
-http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
-http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html
-http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.html
+http://symfony.com/doc/master/book/doctrine.html   
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html   
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html   
+http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.html   
 
 	php app/console doctrine:database:create
 	php app/console generate:doctrine:entity
