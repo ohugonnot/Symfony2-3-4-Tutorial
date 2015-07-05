@@ -369,3 +369,49 @@ http://www.doctrine-project.org/docs/orm/2.1/en/reference/query-builder.html
 - Un repository dispose toujours de quelques méthodes de base, permettant de récupérer de façon très simple les entités.
 - Mais la plupart du temps, il faut créer des méthodes personnelles pour récupérer les entités exactement comme on le veut.
 - Il est indispensable de faire les bonnes jointures afin de limiter au maximum le nombre de requêtes SQL sur vos pages.
+
+
+** Les évènements et extensions Doctrine **
+------
+
+- Définir l'entité comme contenant des callbacks
+	/**
+	 * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\AdvertRepository")
+	 * @ORM\HasLifecycleCallbacks()
+	 */
+	class Advert
+	{
+
+- Définir un callback et ses évènements associés
+	/**
+	 * @ORM\PreUpdate
+	 */
+	public function updateDate()
+
+
+* PrePersist
+L'évènement PrePersist se produit juste avant que l'EntityManager ne persiste effectivement l'entité. Concrètement, cela exécute le callback juste avant un $em->persist($entity). Il ne concerne que les entités nouvellement créées. Du coup, il y a deux conséquences : d'une part, les modifications que vous apportez à l'entité seront persistées en base de données, puisqu'elles sont effectives avant que l'EntityManager n'enregistre l'entité en base. D'autre part, vous n'avez pas accès à l'id de l'entité si celui-ci est autogénéré, car justement l'entité n'est pas encore enregistrée en base de données, et donc l'id pas encore généré.
+
+* PostPersist
+L'évènement postPersist se produit juste après que l'EntityManager ait effectivement persisté l'entité. Attention, cela n'exécute pas le callback juste après le $em->persist($entity), mais juste après le $em->flush(). À l'inverse du prePersist, les modifications que vous apportez à l'entité ne seront pas persistées en base (mais seront tout de même appliquées à l'entité, attention) ; mais vous avez par contre accès à l'id qui a été généré lors du flush().
+
+* PreUpdate
+L'évènement preUpdate se produit juste avant que l'EntityManager ne modifie une entité. Par modifiée, j'entends que l'entité existait déjà, que vous y avez apporté des modifications, puis un $em->flush(). Le callback sera exécuté juste avant le flush(). Attention, il faut que vous ayez modifié au moins un attribut pour que l'EntityManager génère une requête et donc déclenche cet évènement.
+Vous avez accès à l'id autogénéré (car l'entité existe déjà), et vos modifications seront persistées en base de données.
+
+* PostUpdate
+L'évènement postUpdate se produit juste après que l'EntityManager a effectivement modifié une entité. Vous avez accès à l'id et vos modifications ne sont pas persistées en base de données.
+
+* PreRemove
+L'évènement PreRemove se produit juste avant que l'EntityManager ne supprime une entité, c'est-à-dire juste avant un $em->flush() qui précède un $em->remove($entite). Attention, soyez prudents dans cet évènement, si vous souhaitez supprimer des fichiers liés à l'entité par exemple, car à ce moment l'entité n'est pas encore effectivement supprimée, et la suppression peut être annulée en cas d'erreur dans une des opérations à effectuer dans le flush().
+
+* PostRemove
+L'évènement PostRemove se produit juste après que l'EntityManager a effectivement supprimé une entité. Si vous n'avez plus accès à son id, c'est ici que vous pouvez effectuer une suppression de fichier associé par exemple.
+
+* PostLoad
+L'évènement PostLoad se produit juste après que l'EntityManager a chargé une entité (ou après un $em->refresh()). Utile pour appliquer une action lors du chargement d'une entité.
+
+
+- Les évènements permettent de centraliser du code répétitif, afin de systématiser leur exécution et de réduire la duplication de code.
+- Plusieurs évènements jalonnent la vie d'une entité, afin de pouvoir exécuter une fonction aux endroits désirés.
+- Les extensions permettent de reproduire des comportements communs dans une application, afin d'éviter de réinventer la roue.
