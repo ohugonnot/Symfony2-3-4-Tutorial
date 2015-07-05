@@ -113,19 +113,18 @@ http://twig.sensiolabs.org/doc/filters/index.html
 -----
 http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-dependances-en-php   
 
-- Un service est une simple classe associée à une certaine configuration.
-- Le conteneur de services organise et instancie tous vos services, grâce à leur configuration.
-- Les services sont la base de Symfony2, et sont très utilisés par le coeur même du framework.
-- L'injection de dépendances est assurée par le conteneur, qui connaît les arguments dont a besoin un service pour fonctionner, et les lui donne donc à sa création.
+- Un service est une simple classe associée à une certaine configuration.   
+- Le conteneur de services organise et instancie tous vos services, grâce à leur configuration.   
+- Les services sont la base de Symfony2, et sont très utilisés par le coeur même du framework.   
+- L'injection de dépendances est assurée par le conteneur, qui connaît les arguments dont a besoin un service pour fonctionner, et les lui donne donc à sa création.   
+
 
 	$this->get("nom du service")
 	$this->container->geet('nomduservice')
-	
-	# src/OC/PlatformBundle/Resources/config/services.yml
 	services:
-		  oc_platform.antispam:
-        		class: OC\PlatformBundle\Antispam\OCAntispa
-			arguments: [@mailer, %locale%, 50]
+	oc_platform.antispam:
+	class: OC\PlatformBundle\Antispam\OCAntispa
+	arguments: [@mailer, %locale%, 50]
 			
 			
 ** Doctrine ORM, Base de données les bases **
@@ -142,17 +141,18 @@ http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.htm
 	php app/console doctrine:schema:update --dump-sql      creer le fichier sql d'update la base de donnée
 	php app/console doctrine:schema:update --force         applique le fichier sql
 
-3 étapes, Doctrine -> Manager -> Repository
+3 étapes, Doctrine -> Manager -> Repository    
 
 	$doctrine = $this->getDoctrine(); ou $doctrine = $this->get("doctrine");
 	$em = $this->getDoctrine()->getManager();     Pour appeler le Manager d'entité
 	$advertRepository = $em->getRepository('OCPlatformBundle:Advert');
 	
-- Le rôle d'un ORM est de se charger de la persistance de vos données : vous manipulez des objets, et lui s'occupe de les enregistrer en base de données.
-- L'ORM par défaut livré avec Symfony2 est Doctrine2.
-- L'utilisation d'un ORM implique un changement de raisonnement : on utilise des objets, et on raisonne en POO. C'est au développeur de s'adapter à Doctrine2, et non l'inverse !
-- Une entité est, du point de vue PHP, un simple objet. Du point de vue de Doctrine, c'est un objet complété avec des informations de mapping qui lui permettent d'enregistrer correctement l'objet en base de données.
-- Une entité est, du point de vue de votre code, un objet PHP qui correspond à un besoin, et indépendant du reste de votre application.
+- Le rôle d'un ORM est de se charger de la persistance de vos données : vous manipulez des objets, et lui s'occupe de les enregistrer en base de données.    
+- L'ORM par défaut livré avec Symfony2 est Doctrine2.    
+- L'utilisation d'un ORM implique un changement de raisonnement : on utilise des objets, et on raisonne en POO. C'est au développeur de s'adapter à Doctrine2, et non l'inverse !    
+- Une entité est, du point de vue PHP, un simple objet. Du point de vue de Doctrine, c'est un objet complété avec des informations de mapping qui lui permettent d'enregistrer correctement l'objet en base de données.    
+- Une entité est, du point de vue de votre code, un objet PHP qui correspond à un besoin, et indépendant du reste de votre application.    
+
 
 	$em = $this->getDoctrine()->getManager();
 	
@@ -180,30 +180,31 @@ http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.htm
 	// Un INSERT INTO pour ajouter $advert1
 	// Et un UPDATE pour mettre à jour la date de $advert2
 	$em->flush();
+
 	
-* clear($nomEntite) annule tous les persist() effectués. 	
+* clear($nomEntite) annule tous les persist() effectués.     	
 	$em->persist($advert);
 	$em->persist($comment);
 	$em->clear();
 	$em->flush(); // N'exécutera rien, car les deux persists sont annulés par le clear
 
-* detach($entite) annule le persist() effectué sur l'entité en argument. 
+* detach($entite) annule le persist() effectué sur l'entité en argument.      
 	$em->persist($advert);
 	$em->persist($comment);
 	$em->detach($advert);
 	$em->flush(); // Enregistre $comment mais pas $advert
 
-* contains($entite) retourne true si l'entité donnée en argument est gérée par l'EntityManager
+* contains($entite) retourne true si l'entité donnée en argument est gérée par l'EntityManager       
 	$em->persist($advert);
 	var_dump($em->contains($advert)); // Affiche true
 	var_dump($em->contains($comment)); // Affiche false
-
-* refresh($entite) met à jour l'entité donnée en argument dans l'état où elle est en base de données. 
+ 
+* refresh($entite) met à jour l'entité donnée en argument dans l'état où elle est en base de données.         
 	$advert->setTitle('Un nouveau titre');
 	$em->refresh($advert);
 	var_dump($advert->getTitle()); // Affiche « Un ancien titre »
-
-* remove($entite) supprime l'entité donnée en argument de la base de données. Effectif au prochain flush(). 
+  
+* remove($entite) supprime l'entité donnée en argument de la base de données. Effectif au prochain flush().       
 	$em->remove($advert);
 	$em->flush(); // Exécute un DELETE sur $advert
 
