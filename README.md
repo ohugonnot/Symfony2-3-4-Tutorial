@@ -42,6 +42,9 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 	    requirements:
 	        page: \d*
 	        
+	   _format    variable reconnue pour l'extension, charge le bon type de header
+	   _locale    variable reconnue pour la langue, charge la bonne translation
+	        
 - Une route est composée au minimum de deux éléments : l'URL à faire correspondre (son path), et le contrôleur à exécuter (paramètre _controller).
 - Le routeur essaie de faire correspondre chaque route à l'URL appelée par l'internaute, et ce dans l'ordre d'apparition des routes : la première route qui correspond est sélectionnée.
 - Une route peut contenir des paramètres, facultatifs ou non, représentés par les accolades {paramètre}, et dont la valeur peut être soumise à des contraintes via la section requirements.
