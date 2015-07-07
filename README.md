@@ -444,3 +444,151 @@ L'évènement PostLoad se produit juste après que l'EntityManager a chargé une
 - Les évènements permettent de centraliser du code répétitif, afin de systématiser leur exécution et de réduire la duplication de code.
 - Plusieurs évènements jalonnent la vie d'une entité, afin de pouvoir exécuter une fonction aux endroits désirés.
 - Les extensions permettent de reproduire des comportements communs dans une application, afin d'éviter de réinventer la roue.
+
+
+** Formulaires **
+----------
+	php app/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
+
+	 // On crée le FormBuilder grâce au service form factory
+	    $formBuilder = $this->get('form.factory')->createBuilder('form', $advert);
+	    ou
+	    $advert = new Advert;
+	    $form = $this->get('form.factory')->create(new AdvertType, $advert);
+	    $form = $this->createForm(new AdvertType(), $advert).
+	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
+	    $formBuilder
+	      ->add('date',      'date')
+	      ->add('title',     'text')
+	      ->add('content',   'textarea')
+	      ->add('author',    'text')
+	      ->add('published', 'checkbox')
+	      ->add('save',      'submit')
+	    ;
+	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+	
+	    // À partir du formBuilder, on génère le formulaire
+	    $form = $formBuilder->getForm();
+	
+	    // On passe la méthode createView() du formulaire à la vue
+	    // afin qu'elle puisse afficher le formulaire toute seule
+	    return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
+	      'form' => $form->createView(),
+	    ));
+	    
+http://symfony.com/fr/doc/current/reference/forms/types/
+http://symfony.com/fr/doc/current/book/forms.html#habillage-de-formulaire-theming
+http://symfony.com/fr/doc/current/cookbook/form/create_custom_field_type.html   créer des nouveau type de champs    
+Types de champs    
+text
+textarea
+email
+integer
+money
+number
+password
+percent
+search
+url
+choice
+entity
+country
+language
+locale
+timezone
+date
+datetime
+time
+birthday
+checkbox
+file
+radio
+collection
+repeated
+hidden
+csrf     
+
+
+*Avec Twig*    
+form_start() affiche la balise d'ouverture du formulaire HTML, soit <form>. Il faut passer la variable du formulaire en premier argument, et les paramètres en deuxième argument. L'index attr des paramètres, et cela s'appliquera à toutes les fonctions suivantes, représente les attributs à ajouter à la balise générée, ici le <form>. Il nous permet d'appliquer une classe CSS au formulaire, ici form-horizontal.     
+form_errors() affiche les erreurs attachées au champ donné en argument. Nous verrons les erreurs de validation dans le prochain chapitre.     
+form_label() affiche le label HTML du champ donné en argument. Le deuxième argument est le contenu du label.
+form_widget() affiche le champ HTML lui-même (que ce soit <input>, <select>, etc.).      
+form_row() affiche le label, les erreurs et le champ.      
+form_rest() affiche tous les champs manquants du formulaire (dans notre cas, juste le champ CSRF puisque nous avons déjà affiché à la main tous les autres champs).      
+form_end() affiche la balise de fermeture du formulaire HTML, soit </form>.      
+
+*Gestion d'evenements de formulaire*
+http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html
+
+	namespace OC\PlatformBundle\Form;
+	
+	use Symfony\Component\Form\AbstractType;
+	use Symfony\Component\Form\FormBuilderInterface;
+	// N'oubliez pas ces deux use !
+	use Symfony\Component\Form\FormEvent;
+	use Symfony\Component\Form\FormEvents;
+	use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+	
+	class AdvertType extends AbstractType
+	{
+	  public function buildForm(FormBuilderInterface $builder, array $options)
+	  {
+	    // Ajoutez ici tous vos champs sauf le champ published
+	    $builder = ...;
+	
+	    // On ajoute une fonction qui va écouter un évènement
+	    $builder->addEventListener(
+	      FormEvents::PRE_SET_DATA,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
+	      function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
+	        // On récupère notre objet Advert sous-jacent
+	        $advert = $event->getData();
+	
+	        // Cette condition est importante, on en reparle plus loin
+	        if (null === $advert) {
+	          return; // On sort de la fonction sans rien faire lorsque $advert vaut null
+	        }
+	
+	        if (!$advert->getPublished() || null === $advert->getId()) {
+	          // Si l'annonce n'est pas publiée, ou si elle n'existe pas encore en base (id est null),
+	          // alors on ajoute le champ published
+	          $event->getForm()->add('published', 'checkbox', array('required' => false));
+	        } else {
+	          // Sinon, on le supprime
+	          $event->getForm()->remove('published');
+	        }
+	      }
+	    );
+	  }
+	}
+
+- Un formulaire se construit sur un objet existant, et son objectif est d'hydrater cet objet.
+- Un formulaire se construit grâce à un FormBuilder, et dans un fichier XxxType indépendant.
+- En développement, le rendu d'un formulaire se fait en une seule ligne grâce à la méthode {{ form(form) }}.
+- Il est possible d'imbriquer les formulaires grâce aux XxxType.
+- Le type de champ collection affiche une liste de champs d'un certain type.
+- Le type de champ entity retourne une ou plusieurs entités.
+- Il est possible d'utiliser le mécanisme d'héritage pour créer des formulaires différents mais ayant la même base.
+- Le type de champ File permet l'upload de fichier, et se couple aux entités grâce aux évènements Doctrine.     
+
+** Validation de formulaire **
+------
+
+http://symfony.com/fr/doc/current/reference/constraints.html
+
+-Le composant validator permet de valider les données d'un objet suivant des règles définies.
+- Cette validation est systématique lors de la soumission d'un formulaire : il est en effet impensable de laisser l'utilisateur entrer ce qu'il veut sans vérifier !
+- Les règles de validation se définissent via les annotations directement à côté des attributs de la classe à valider. Vous pouvez bien sûr utiliser d'autres formats tels que le YAML ou le XML.
+- Il est également possible de valider à l'aide de getters, de callbacks ou même de services. Cela rend la procédure de validation très flexible et très puissante.
+
+** Sécurité **
+--------
+
+- La sécurité se compose de deux couches :
+   L'authentification, qui définit qui est le visiteur ;
+   L'autorisation, qui définit si le visiteur a accès à la ressource demandée.
+- Le fichier security.yml permet de configurer finement chaque acteur de la sécurité :
+   La configuration de l'authentification passe surtout par le paramétrage d'un ou plusieurs pare-feu ;
+   La configuration de l'autorisation se fait au cas par cas suivant les ressources : on peut sécuriser une méthode de contrôleur, un affichage ou une URL.
+- Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;
+- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.
