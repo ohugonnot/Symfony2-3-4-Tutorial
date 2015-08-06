@@ -448,6 +448,7 @@ L'évènement PostLoad se produit juste après que l'EntityManager a chargé une
 
 ** Formulaires **
 ----------
+
 	php app/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
 
 	 // On crée le FormBuilder grâce au service form factory
@@ -476,9 +477,9 @@ L'évènement PostLoad se produit juste après que l'EntityManager a chargé une
 	      'form' => $form->createView(),
 	    ));
 	    
-http://symfony.com/fr/doc/current/reference/forms/types/
-http://symfony.com/fr/doc/current/book/forms.html#habillage-de-formulaire-theming
-http://symfony.com/fr/doc/current/cookbook/form/create_custom_field_type.html   créer des nouveau type de champs    
+http://symfony.com/fr/doc/current/reference/forms/types/      
+http://symfony.com/fr/doc/current/book/forms.html#habillage-de-formulaire-theming      
+http://symfony.com/fr/doc/current/cookbook/form/create_custom_field_type.html   créer des nouveau type de champs                   
 Types de champs    
 text
 textarea
@@ -510,16 +511,18 @@ csrf
 
 
 *Avec Twig*    
-form_start() affiche la balise d'ouverture du formulaire HTML, soit <form>. Il faut passer la variable du formulaire en premier argument, et les paramètres en deuxième argument. L'index attr des paramètres, et cela s'appliquera à toutes les fonctions suivantes, représente les attributs à ajouter à la balise générée, ici le <form>. Il nous permet d'appliquer une classe CSS au formulaire, ici form-horizontal.     
-form_errors() affiche les erreurs attachées au champ donné en argument. Nous verrons les erreurs de validation dans le prochain chapitre.     
-form_label() affiche le label HTML du champ donné en argument. Le deuxième argument est le contenu du label.
-form_widget() affiche le champ HTML lui-même (que ce soit <input>, <select>, etc.).      
-form_row() affiche le label, les erreurs et le champ.      
-form_rest() affiche tous les champs manquants du formulaire (dans notre cas, juste le champ CSRF puisque nous avons déjà affiché à la main tous les autres champs).      
-form_end() affiche la balise de fermeture du formulaire HTML, soit </form>.      
 
-*Gestion d'evenements de formulaire*
-http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html
+form_start() affiche la balise d'ouverture du formulaire HTML, soit <form>. Il faut passer la variable du formulaire en premier argument, et les paramètres en deuxième argument. L'index attr des paramètres, et cela s'appliquera à toutes les fonctions suivantes, représente les attributs à ajouter à la balise générée, ici le <form>. Il nous permet d'appliquer une classe CSS au formulaire, ici form-horizontal.                            
+form_errors() affiche les erreurs attachées au champ donné en argument. Nous verrons les erreurs de validation dans le prochain chapitre.                                    
+form_label() affiche le label HTML du champ donné en argument. Le deuxième argument est le contenu du label.               
+form_widget() affiche le champ HTML lui-même (que ce soit <input>, <select>, etc.).                         
+form_row() affiche le label, les erreurs et le champ.                        
+form_rest() affiche tous les champs manquants du formulaire (dans notre cas, juste le champ CSRF puisque nous avons déjà affiché à la main tous les autres champs).                          
+form_end() affiche la balise de fermeture du formulaire HTML, soit </form>.                            
+
+*Gestion d'evenements de formulaire*                   
+http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html                       
+
 
 	namespace OC\PlatformBundle\Form;
 	
@@ -562,33 +565,34 @@ http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html
 	  }
 	}
 
-- Un formulaire se construit sur un objet existant, et son objectif est d'hydrater cet objet.
-- Un formulaire se construit grâce à un FormBuilder, et dans un fichier XxxType indépendant.
-- En développement, le rendu d'un formulaire se fait en une seule ligne grâce à la méthode {{ form(form) }}.
-- Il est possible d'imbriquer les formulaires grâce aux XxxType.
-- Le type de champ collection affiche une liste de champs d'un certain type.
-- Le type de champ entity retourne une ou plusieurs entités.
-- Il est possible d'utiliser le mécanisme d'héritage pour créer des formulaires différents mais ayant la même base.
-- Le type de champ File permet l'upload de fichier, et se couple aux entités grâce aux évènements Doctrine.     
+
+- Un formulaire se construit sur un objet existant, et son objectif est d'hydrater cet objet.               
+- Un formulaire se construit grâce à un FormBuilder, et dans un fichier XxxType indépendant.                  
+- En développement, le rendu d'un formulaire se fait en une seule ligne grâce à la méthode {{ form(form) }}.               
+- Il est possible d'imbriquer les formulaires grâce aux XxxType.              
+- Le type de champ collection affiche une liste de champs d'un certain type.             
+- Le type de champ entity retourne une ou plusieurs entités.                   
+- Il est possible d'utiliser le mécanisme d'héritage pour créer des formulaires différents mais ayant la même base.         
+- Le type de champ File permet l'upload de fichier, et se couple aux entités grâce aux évènements Doctrine.                  
 
 ** Validation de formulaire **
 ------
 
-http://symfony.com/fr/doc/current/reference/constraints.html
+http://symfony.com/fr/doc/current/reference/constraints.html                   
 
--Le composant validator permet de valider les données d'un objet suivant des règles définies.
-- Cette validation est systématique lors de la soumission d'un formulaire : il est en effet impensable de laisser l'utilisateur entrer ce qu'il veut sans vérifier !
-- Les règles de validation se définissent via les annotations directement à côté des attributs de la classe à valider. Vous pouvez bien sûr utiliser d'autres formats tels que le YAML ou le XML.
-- Il est également possible de valider à l'aide de getters, de callbacks ou même de services. Cela rend la procédure de validation très flexible et très puissante.
+-Le composant validator permet de valider les données d'un objet suivant des règles définies.                
+- Cette validation est systématique lors de la soumission d'un formulaire : il est en effet impensable de laisser l'utilisateur entrer ce qu'il veut sans vérifier !                 
+- Les règles de validation se définissent via les annotations directement à côté des attributs de la classe à valider. Vous pouvez bien sûr utiliser d'autres formats tels que le YAML ou le XML.                          
+- Il est également possible de valider à l'aide de getters, de callbacks ou même de services. Cela rend la procédure de validation très flexible et très puissante.                      
 
 ** Sécurité **
 --------
 
-- La sécurité se compose de deux couches :
-   L'authentification, qui définit qui est le visiteur ;
-   L'autorisation, qui définit si le visiteur a accès à la ressource demandée.
-- Le fichier security.yml permet de configurer finement chaque acteur de la sécurité :
-   La configuration de l'authentification passe surtout par le paramétrage d'un ou plusieurs pare-feu ;
-   La configuration de l'autorisation se fait au cas par cas suivant les ressources : on peut sécuriser une méthode de contrôleur, un affichage ou une URL.
-- Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;
-- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.
+- La sécurité se compose de deux couches :                          
+   L'authentification, qui définit qui est le visiteur ;                    
+   L'autorisation, qui définit si le visiteur a accès à la ressource demandée.                
+- Le fichier security.yml permet de configurer finement chaque acteur de la sécurité :                  
+   La configuration de l'authentification passe surtout par le paramétrage d'un ou plusieurs pare-feu ;                  
+   La configuration de l'autorisation se fait au cas par cas suivant les ressources : on peut sécuriser une méthode de contrôleur, un affichage ou une URL.                   
+- Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;                 
+- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.             
