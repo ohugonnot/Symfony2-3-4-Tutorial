@@ -607,4 +607,10 @@ http://symfony.com/fr/doc/current/reference/constraints.html
    La configuration de l'authentification passe surtout par le paramétrage d'un ou plusieurs pare-feu ;                  
    La configuration de l'autorisation se fait au cas par cas suivant les ressources : on peut sécuriser une méthode de contrôleur, un affichage ou une URL.                   
 - Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;                 
-- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.             
+- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.        
+** Assetic **
+--------
+
+	app/console assets:install web --symlink
+	php app/console assetic:dump --env=prod --no-debug
+	php app/console assetic:dump 
