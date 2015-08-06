@@ -510,19 +510,32 @@ hidden
 csrf     
 
 
-*Avec Twig*    
+** Avec Twig ** 
 
-form_start() affiche la balise d'ouverture du formulaire HTML, soit <form>. Il faut passer la variable du formulaire en premier argument, et les paramètres en deuxième argument. L'index attr des paramètres, et cela s'appliquera à toutes les fonctions suivantes, représente les attributs à ajouter à la balise générée, ici le <form>. Il nous permet d'appliquer une classe CSS au formulaire, ici form-horizontal.                            
-form_errors() affiche les erreurs attachées au champ donné en argument. Nous verrons les erreurs de validation dans le prochain chapitre.                                    
-form_label() affiche le label HTML du champ donné en argument. Le deuxième argument est le contenu du label.               
-form_widget() affiche le champ HTML lui-même (que ce soit <input>, <select>, etc.).                         
-form_row() affiche le label, les erreurs et le champ.                        
-form_rest() affiche tous les champs manquants du formulaire (dans notre cas, juste le champ CSRF puisque nous avons déjà affiché à la main tous les autres champs).                          
-form_end() affiche la balise de fermeture du formulaire HTML, soit </form>.                            
+**form_start()**	
+affiche la balise d'ouverture du formulaire HTML, soit <form>. Il faut passer la variable du formulaire en premier argument, et les paramètres en deuxième argument. L'index attr des paramètres, et cela s'appliquera à toutes les fonctions suivantes, représente les attributs à ajouter à la balise générée, ici le <form>. Il nous permet d'appliquer une classe CSS au formulaire, ici form-horizontal.   
 
-*Gestion d'evenements de formulaire*                   
-http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html                       
+**form_errors()**         
+affiche les erreurs attachées au champ donné en argument. Nous verrons les erreurs de validation dans le prochain chapitre.	
 
+**form_label()**	
+affiche le label HTML du champ donné en argument. Le deuxième argument est le contenu du label.       
+
+**form_widget()**			  
+affiche le champ HTML lui-même (que ce soit input, select, etc.)	                     
+
+**form_row()**		
+affiche le label, les erreurs et le champ.                        
+
+**form_rest()**	
+affiche tous les champs manquants du formulaire (dans notre cas, juste le champ CSRF puisque nous avons déjà affiché à la main tous les autres champs).                   
+
+**form_end()**	
+affiche la balise de fermeture du formulaire HTML, soit </form>.	
+
+** Gestion d'evenements de formulaire **
+
+http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.htm		               
 
 	namespace OC\PlatformBundle\Form;
 	
@@ -576,7 +589,6 @@ http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.html
 - Le type de champ File permet l'upload de fichier, et se couple aux entités grâce aux évènements Doctrine.                  
 
 ** Validation de formulaire **
-------
 
 http://symfony.com/fr/doc/current/reference/constraints.html                   
 
