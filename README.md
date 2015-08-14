@@ -13,7 +13,7 @@ https://getcomposer.org/download/  Composer, pour l'installation des bundle (mod
 ** Vider le cache avec la console **
 ----
 
-	php app/console cache:clear --env=prod  (pour l'environnement de prod)
+	php app/console cache:clear --env=prod
 	php app/console cache:clear 
 
 ** Bundle ** 
@@ -109,7 +109,13 @@ http://twig.sensiolabs.org/doc/filters/index.html
 - La syntaxe {{ var }}affiche la variable var ;
 - La syntaxe {% if %} fait quelque chose, ici une condition ;
 - Twig offre un système d'héritage (via {% extends %}) et d'inclusion (via {{ include() }} et {{ render() }}) très intéressant pour bien organiser les templates ;
-- Le modèle triple héritage est très utilisé pour des projets avec Symfony2.
+- Le modèle triple héritage est très utilisé pour des projets avec Symfony2.     
+
+	
+		*Remplacer les vues d'un bundle*     
+		Il est très simple de remplacer les vues d'un bundle quelconque par les nôtres. 
+		Il suffit de créer le répertoire app/Resources/NomDuBundle/views/ et d'y placer nos vues à nous ! 
+		Et cela est valable quelque soit le bundle.      
 
 
 ** Service **
@@ -607,10 +613,18 @@ http://symfony.com/fr/doc/current/reference/constraints.html
    La configuration de l'authentification passe surtout par le paramétrage d'un ou plusieurs pare-feu ;                  
    La configuration de l'autorisation se fait au cas par cas suivant les ressources : on peut sécuriser une méthode de contrôleur, un affichage ou une URL.                   
 - Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;                 
-- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main.        
+- On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main. 
+
+
 ** Assetic **
 --------
 
 	app/console assets:install web --symlink
 	php app/console assetic:dump --env=prod --no-debug
 	php app/console assetic:dump 
+
+
+** Mise en production **
+--------
+
+https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2/deployer-son-site-symfony2-en-production        
