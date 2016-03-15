@@ -74,6 +74,7 @@ http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html
 ------
 http://twig.sensiolabs.org/documentation 
 http://twig.sensiolabs.org/doc/filters/index.html 
+http://alexandre.clain.info/twig-les-variables-globales/
 
 ```twig
 	{% dump(var) %}
