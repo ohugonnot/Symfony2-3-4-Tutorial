@@ -2,12 +2,12 @@
 Récapitulatif des points important.
 ====
 Code source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
-http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2   
+http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2    
 
 ** Logiciels Nécessaires **
 -----
-http://msysgit.github.io/  Git + Console d'emulation unix
-https://getcomposer.org/download/  Composer, pour l'installation des bundle (modifier le composer.json)
+http://msysgit.github.io/  Git + Console d'emulation unix           
+https://getcomposer.org/download/  Composer, pour l'installation des bundle (modifier le composer.json)           
 
 
 ** Vider le cache avec la console **
@@ -19,18 +19,18 @@ https://getcomposer.org/download/  Composer, pour l'installation des bundle (mod
 ** Bundle ** 
 ----
 
-- Un bundle est une brique de votre application : il contient tout ce qui concerne une fonctionnalité donnée. Cela permet de bien organiser les différentes parties de votre site.
-- Il existe des milliers de bundles développés par la communauté, pensez à vérifier qu'il n'existe pas déjà un bundle qui fait ce que vous souhaitez faire ! 
-
+- Un bundle est une brique de votre application : il contient tout ce qui concerne une fonctionnalité donnée. Cela permet de bien organiser les différentes parties de votre site.         
+- Il existe des milliers de bundles développés par la communauté, pensez à vérifier qu'il n'existe pas déjà un bundle qui fait ce que vous souhaitez faire !         
+        
 La commande pour générer un nouveau bundle est
 
 	php app/console generate:bundle
 	
 Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 
-- Son code source, situé dans src/Application/Bundle, et dont le seul fichier obligatoire est la classe à la racine OCPlatformBundle.php ;
-- Enregistrer le bundle dans le noyau pour qu'il soit chargé, en modifiant le fichier app/AppKernel.php ;
-- Enregistrer les routes (si le bundle en contient) dans le Routeur pour qu'elles soient chargées, en modifiant le fichier app/config/routing.yml.
+- Son code source, situé dans src/Application/Bundle, et dont le seul fichier obligatoire est la classe à la racine OCPlatformBundle.php ;       
+- Enregistrer le bundle dans le noyau pour qu'il soit chargé, en modifiant le fichier app/AppKernel.php ;     
+- Enregistrer les routes (si le bundle en contient) dans le Routeur pour qu'elles soient chargées, en modifiant le fichier app/config/routing.yml.    
 
 
 ** Routeur ** 
@@ -46,10 +46,10 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 	   _locale    variable reconnue pour la langue, charge la bonne translation
 ```
 
-- Une route est composée au minimum de deux éléments : l'URL à faire correspondre (son path), et le contrôleur à exécuter (paramètre _controller).
-- Le routeur essaie de faire correspondre chaque route à l'URL appelée par l'internaute, et ce dans l'ordre d'apparition des routes : la première route qui correspond est sélectionnée.
-- Une route peut contenir des paramètres, facultatifs ou non, représentés par les accolades {paramètre}, et dont la valeur peut être soumise à des contraintes via la section requirements.
-- Le routeur est également capable de générer des URL à partir du nom d'une route, et de ses paramètres éventuels.
+- Une route est composée au minimum de deux éléments : l'URL à faire correspondre (son path), et le contrôleur à exécuter (paramètre _controller).     
+- Le routeur essaie de faire correspondre chaque route à l'URL appelée par l'internaute, et ce dans l'ordre d'apparition des routes : la première route qui correspond est sélectionnée.     
+- Une route peut contenir des paramètres, facultatifs ou non, représentés par les accolades {paramètre}, et dont la valeur peut être soumise à des contraintes via la section requirements.     
+- Le routeur est également capable de générer des URL à partir du nom d'une route, et de ses paramètres éventuels.    
 
 
 ** Controller ** 
@@ -65,9 +65,9 @@ http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html
 	$this->redirect($url);       
 ```
 
--Le rôle du contrôleur est de retourner un objet Response : ceci est obligatoire !
-- Le contrôleur construit la réponse en fonction des données qu'il a en entrée : paramètre de route et objet Request.
-- Le contrôleur se sert de tout ce dont il a besoin pour construire la réponse : la base de données, les vues, les différents services, etc.	
+- Le rôle du contrôleur est de retourner un objet Response : ceci est obligatoire !       
+- Le contrôleur construit la réponse en fonction des données qu'il a en entrée : paramètre de route et objet Request.        
+- Le contrôleur se sert de tout ce dont il a besoin pour construire la réponse : la base de données, les vues, les différents services, etc.	    
     
 
 ** Twig ** 
