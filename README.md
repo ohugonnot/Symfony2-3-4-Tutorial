@@ -16,6 +16,27 @@ https://getcomposer.org/download/  Composer, pour l'installation des bundle (mod
 	php app/console cache:clear --env=prod
 	php app/console cache:clear 
 
+** Donner les droits au répertoire var/  ou app/cache **
+----
+
+	rm -rf var/*
+	
+Ensuite, si votre distribution supporte le chmod +a, exécutez ces commandes pour définir les bons droits :
+
+	HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\ -f1`
+	sudo chmod +a "$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit" var
+	sudo chmod +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" var
+	
+Si vous rencontrez une erreur avec ces commandes (le chmod +a n'est pas disponible partout), exécutez les commandes suivantes, qui n'utilisent pas le chmod +a :
+
+	HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\ -f1`
+	sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+	sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+
+Enfin, si vous ne pouvez pas utiliser les ACL (utilisés dans les commandes précédentes), définissez simplement les droits comme suit :
+
+	chmod 777 -R var
+	
 
 ** Bundle ** 
 ----
