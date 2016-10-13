@@ -1,7 +1,7 @@
 
-Récapitulatif des points important.
+Récapitulatif des points importants.
 ====
-Code source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
+Source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
 http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2    
 
 ** Logiciels Nécessaires **
@@ -15,6 +15,7 @@ https://getcomposer.org/download/  Composer, pour l'installation des bundle (mod
 
 	php app/console cache:clear --env=prod
 	php app/console cache:clear 
+
 
 ** Bundle ** 
 ----
@@ -130,7 +131,7 @@ http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-depen
 
 ```php
 	$this->get("nom du service")
-	$this->container->geet('nomduservice')
+	$this->container->get('nomduservice')
 	
 	services:
 		oc_platform.antispam:
@@ -412,7 +413,7 @@ https://github.com/doctrine/doctrine2/blob/master/lib/Doctrine/ORM/EntityReposit
 
 	$advert = $repository->findOneByTitle('Recherche développeur.');
 
-**Les requetes personnelle dans le Repository**      
+**Les requetes personnelles dans le Repository**      
 http://www.doctrine-project.org/docs/orm/2.1/en/reference/query-builder.html
 
 ```php	
