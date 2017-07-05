@@ -57,7 +57,7 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 
 ** Routeur ** 
 ----
-```yml
+```
 	oc_platform_home:
 	    path:      /{page}
 	    defaults:  { _controller: OCPlatformBundle:Advert:index, page: 1 }
