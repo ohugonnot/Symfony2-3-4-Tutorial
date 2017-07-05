@@ -13,8 +13,8 @@ https://getcomposer.org/download/  Composer, pour l'installation des bundle (mod
 ** Vider le cache avec la console **
 ----
 
-	php app/console cache:clear --env=prod
-	php app/console cache:clear 
+	php bin/console cache:clear --env=prod
+	php bin/console cache:clear 
 
 ** Donner les droits au répertoire var/  ou app/cache **
 ----
@@ -46,7 +46,7 @@ Enfin, si vous ne pouvez pas utiliser les ACL (utilisés dans les commandes pré
         
 La commande pour générer un nouveau bundle est
 
-	php app/console generate:bundle
+	php bin/console generate:bundle
 	
 Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 
@@ -173,12 +173,12 @@ http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
 http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html   
 http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.html   
 
-	php app/console doctrine:database:create      créer la base de données de l'application
-	php app/console generate:doctrine:entity      créer une entité 
-	php app/console doctrine:generate:entities OCPlatformBundle:Advert    mettre a jour l'entité
-	php app/console doctrine:fixtures:load        creer les fixture pour tester l'app
-	php app/console doctrine:schema:update --dump-sql      
-	php app/console doctrine:schema:update --force         
+	php bin/console doctrine:database:create      créer la base de données de l'application
+	php bin/console generate:doctrine:entity      créer une entité 
+	php bin/console doctrine:generate:entities OCPlatformBundle:Advert    mettre a jour l'entité
+	php bin/console doctrine:fixtures:load        creer les fixture pour tester l'app
+	php bin/console doctrine:schema:update --dump-sql      
+	php bin/console doctrine:schema:update --force         
 
 3 étapes, Doctrine -> Manager -> Repository    
 
@@ -524,7 +524,7 @@ L'évènement PostLoad se produit juste après que l'EntityManager a chargé une
 ----------
 
 ```php
-	php app/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
+	php bin/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
 
 	 // On crée le FormBuilder grâce au service form factory
 	    $formBuilder = $this->get('form.factory')->createBuilder('form', $advert);
@@ -691,8 +691,8 @@ http://symfony.com/fr/doc/current/reference/constraints.html
 --------
 
 	app/console assets:install web --symlink
-	php app/console assetic:dump --env=prod --no-debug
-	php app/console assetic:dump 
+	php bin/console assetic:dump --env=prod --no-debug
+	php bin/console assetic:dump 
 
 
 ** Mise en production **
