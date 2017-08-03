@@ -4,6 +4,9 @@ Récapitulatif des points importants.
 Source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
 http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2    
 
+Les Réferences des configs symfony
+https://symfony.com/doc/current/reference/index.html
+
 ** Logiciels Nécessaires **
 -----
 http://msysgit.github.io/  Git + Console d'emulation unix           
