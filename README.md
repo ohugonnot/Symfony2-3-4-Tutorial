@@ -69,12 +69,19 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 	        
 	   _format    variable reconnue pour l'extension, charge le bon type de header
 	   _locale    variable reconnue pour la langue, charge la bonne translation
+	   _fragment  Used to set the fragment identifier, the optional last part of a URL that starts with a # character                         and is used to identify a portion of a document.
+	   condition : permet de faire des conditions sous forme de requetes (firefox, IE, ect...)
+	   
+	   // pour le debug
+	   php bin/console debug:router [name]             (donne les différents routes ou les infos sur un route)
+	   php bin/console router:match /url/du/routeur    (donne le route d'une url)
 ```
 
 - Une route est composée au minimum de deux éléments : l'URL à faire correspondre (son path), et le contrôleur à exécuter (paramètre _controller).     
 - Le routeur essaie de faire correspondre chaque route à l'URL appelée par l'internaute, et ce dans l'ordre d'apparition des routes : la première route qui correspond est sélectionnée.     
 - Une route peut contenir des paramètres, facultatifs ou non, représentés par les accolades {paramètre}, et dont la valeur peut être soumise à des contraintes via la section requirements.     
 - Le routeur est également capable de générer des URL à partir du nom d'une route, et de ses paramètres éventuels.    
+- On peut également rediriger directement https://symfony.com/doc/3.4/routing/redirect_in_config.html      
 
 
 ** Controller ** 
@@ -88,6 +95,9 @@ http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html
 	$this->render('BundleName:Controller:methode.html.twig', array('key' => $val))          
 	$contenu = $this->renderView() recuper le contenu      
 	$this->redirect($url);       
+	
+	// autowire des service dans les controller juste avec le Hint du service
+	php bin/console debug:autowiring
 ```
 
 - Le rôle du contrôleur est de retourner un objet Response : ceci est obligatoire !       
