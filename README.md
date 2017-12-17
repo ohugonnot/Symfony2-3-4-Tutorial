@@ -41,6 +41,23 @@ Enfin, si vous ne pouvez pas utiliser les ACL (utilisés dans les commandes pré
 	chmod 777 -R var
 	
 
+** Configuration ** 
+----
+
+```
+	php bin/console config:dump-reference twig
+	
+	// Pour éviter d'écraser le parmeter.yml à chaque composer update ou install dans le composer.json
+	"extra": {
+            "incenteev-parameters": {
+                "keep-outdated": true
+        }
+	
+	// prendre un parameter de la config dans un controller 
+	$adminEmail = $this->container->getParameter('admin_email');
+```
+
+
 ** Bundle ** 
 ----
 
@@ -535,35 +552,50 @@ L'évènement PostLoad se produit juste après que l'EntityManager a chargé une
 
 ** Formulaires **
 ----------
-
+https://symfony.com/doc/3.4/form/data_transformers.html << format transformer pour changer les data a l'affichage et a la sauvegarde    
+https://symfony.com/doc/3.4/form/disabling_validation.html  << disable data validation     
+https://symfony.com/doc/3.4/form/dynamic_form_modification.html#form-events-underlying-data << add event to the form     
+https://symfony.com/doc/3.4/form/form_customization.html << customisation twig form     
+      
 ```php
 	php bin/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
 
-	 // On crée le FormBuilder grâce au service form factory
-	    $formBuilder = $this->get('form.factory')->createBuilder('form', $advert);
-	    ou
-	    $advert = new Advert;
-	    $form = $this->get('form.factory')->create(new AdvertType, $advert);
-	    $form = $this->createForm(new AdvertType(), $advert).
-	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
-	    $formBuilder
-	      ->add('date',      'date')
-	      ->add('title',     'text')
-	      ->add('content',   'textarea')
-	      ->add('author',    'text')
-	      ->add('published', 'checkbox')
-	      ->add('save',      'submit')
-	    ;
-	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
-	
-	    // À partir du formBuilder, on génère le formulaire
-	    $form = $formBuilder->getForm();
-	
+	 $task = new Task();
+
+	    $form = $this->createFormBuilder($task)
+		->add('task', TextType::class)
+		->add('dueDate', DateType::class)
+		->add('save', SubmitType::class, array('label' => 'Create Task'))
+		->getForm();
+
+	    $form->handleRequest($request);
+
+	    if ($form->isSubmitted() && $form->isValid()) {
+		// $form->getData() holds the submitted values
+		// but, the original `$task` variable has also been updated
+		$task = $form->getData();
+
+		// ... perform some action, such as saving the task to the database
+		// for example, if Task is a Doctrine entity, save it!
+		// $em = $this->getDoctrine()->getManager();
+		// $em->persist($task);
+		// $em->flush();
+
+		return $this->redirectToRoute('task_success');
+	    }
+
 	    // On passe la méthode createView() du formulaire à la vue
 	    // afin qu'elle puisse afficher le formulaire toute seule
 	    return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
 	      'form' => $form->createView(),
 	    ));
+	    
+	    // In twig
+	    {{ form(form, {'method': 'GET'}) 
+	    {{ form_row(form.submit, { 'label': 'Submit me' }) }}
+	    {{ form_end(form, {'render_rest': false}) }}
+	    // desactivate html5 required
+	    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
 ```
 
 http://symfony.com/fr/doc/current/reference/forms/types/      
