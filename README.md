@@ -184,6 +184,11 @@ http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-depen
 	$this->get("nom du service")
 	$this->container->get('nomduservice')
 	
+	// Pour avoir la liste des services disponible
+	php bin/console debug:container
+	// Pour connaitre tous les service avec autowiring
+	php bin/console debug:autowiring
+	
 	services:
 		oc_platform.antispam:
 			class: OC\PlatformBundle\Antispam\OCAntispa
@@ -194,8 +199,22 @@ http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-depen
 - Le conteneur de services organise et instancie tous vos services, grâce à leur configuration.   
 - Les services sont la base de Symfony2, et sont très utilisés par le coeur même du framework.   
 - L'injection de dépendances est assurée par le conteneur, qui connaît les arguments dont a besoin un service pour fonctionner, et les lui donne donc à sa création.
+      
+### Injection par Constructor     
+**Avantages**             
+- If the dependency is a requirement and the class cannot work without it then injecting it via the constructor ensures it is present when the class is used as the class cannot be constructed without it.        
+- The constructor is only ever called once when the object is created, so you can be sure that the dependency will not change during the object's lifetime.      
 
+### Injection par Seter     
+**Avantages**      
+- Setter injection works well with optional dependencies. If you do not need the dependency, then just do not call the setter.      
+- You can call the setter multiple times. This is particularly useful if the method adds the dependency to a collection. You can then have a variable number of dependencies.     
+   
+**Inconvenients**
+- The setter can be called more than just at the time of construction so you cannot be sure the dependency is not replaced during the lifetime of the object (except by explicitly writing the setter method to check if it has already been called).      
+- You cannot be sure the setter will be called and so you need to add checks that any required dependencies are injected.     
 
+   
 ** Doctrine ORM, Base de données les bases **
 ----
 http://symfony.com/doc/master/book/doctrine.html   
@@ -731,6 +750,18 @@ http://symfony.com/fr/doc/current/reference/constraints.html
 - Les rôles associés aux utilisateurs définissent les droits dont ils disposent ;                 
 - On peut configurer la sécurité pour utiliser FOSUserBundle, un bundle qui offre un espace membres presque clé en main. 
 
+```
+// ...
+	use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+	/**
+	 * @Security("has_role('ROLE_ADMIN')")
+	 */
+	public function helloAction($name)
+	{
+	    // ...
+	}
+```
 
 ** Assetic **
 --------
