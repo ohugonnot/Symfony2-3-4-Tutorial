@@ -7,6 +7,9 @@ http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-sy
 Les Réferences des configs symfony
 https://symfony.com/doc/current/reference/index.html
 
+Liens de formations à tester
+https://online.parlonscode.com/courses/devenez-un-pro-symfony-3-et-4
+
 ** Logiciels Nécessaires **
 -----
 http://msysgit.github.io/  Git + Console d'emulation unix           
