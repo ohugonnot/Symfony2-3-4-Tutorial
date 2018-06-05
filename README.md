@@ -225,13 +225,23 @@ http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
 http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html   
 http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.html   
 
-	php bin/console doctrine:database:create      créer la base de données de l'application
+	// Modifier ou créer des entités et des fixtures
 	php bin/console generate:doctrine:entity      créer une entité 
 	php bin/console doctrine:generate:entities OCPlatformBundle:Advert    mettre a jour l'entité
+	
+	// Pour les fixture avec DoctrineFixtureBundle et Alice
 	php bin/console doctrine:fixtures:load        creer les fixture pour tester l'app
+	
+	// Mettre à jour la base de données
+	php bin/console doctrine:database:create
+	php bin/console doctrine:schema:drop --force
 	php bin/console doctrine:schema:update --dump-sql      
-	php bin/console doctrine:schema:update --force         
-
+	php bin/console doctrine:schema:update --force  
+	
+	// Si on utilise DoctrineMigrationBundle ce qui est conseillé en prod
+	php bin/console doctrine:migrations:diff
+	php bin/console doctrine:migrations:diff
+	
 3 étapes, Doctrine -> Manager -> Repository    
 
 ```php
