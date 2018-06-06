@@ -143,7 +143,7 @@ http://alexandre.clain.info/twig-les-variables-globales/
 	href="{{ path('oc_platform_view', { 'id': advert_id }) }}"
 	
 	{% if var is defined %} … {% endif %}
-	{% for valeur, option in liste_options %} ... {% endfor %}
+	{% for valeur, option in liste_options %} ... {% else %}{% endfor %} // Possible de mettre un else quand le array est vide
 	{% block nom_du_block %}{% endblock %}
 	{% extends "OCPlatformBundle::layout.html.twig" %}       {# quand le template herite d'un autre #}
 	{{ render(controller("OCPlatformBundle:Advert:menu")) }} {# pour une partie variable qui depend d'un controller #}
