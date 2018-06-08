@@ -238,9 +238,12 @@ http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.htm
 	php bin/console doctrine:schema:update --dump-sql      
 	php bin/console doctrine:schema:update --force  
 	
+	// Executer du SQL dans la console
+	php bin/console doctrine:query:sql 'SELECT * FROM '
+	
 	// Si on utilise DoctrineMigrationBundle ce qui est conseillé en prod
 	php bin/console doctrine:migrations:diff
-	php bin/console doctrine:migrations:diff
+	php bin/console doctrine:migrations:migrate
 	
 3 étapes, Doctrine -> Manager -> Repository    
 
