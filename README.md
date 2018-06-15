@@ -354,7 +354,7 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 
 ```php	
 	 /**
-	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert")
+	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert",  fetch="EXTRA_LAZY") // Extra_lazy permet de charger les collections en lazy loading
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	 private $advert;
