@@ -13,7 +13,19 @@ https://online.parlonscode.com/courses/devenez-un-pro-symfony-3-et-4
 ** Logiciels Nécessaires **
 -----
 http://msysgit.github.io/  Git + Console d'emulation unix           
-https://getcomposer.org/download/  Composer, pour l'installation des bundle (modifier le composer.json)           
+https://getcomposer.org/download/  Composer, pour l'installation des bundle (modifier le composer.json)      
+https://yarnpkg.com/lang/en/docs/install/#windows-stable yarn                   
+https://nodejs.org/en/download/ nodejs                 
+
+** Installation symfony Flex **
+```
+	composer require server --dev
+	composre require profiler --dev
+	composer require debug --dev
+	composer unpack debug
+	composer require annotations sec-checker twig asset encore
+	yarn install
+```
 
 
 ** Vider le cache avec la console **
