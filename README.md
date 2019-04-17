@@ -1,14 +1,35 @@
 
 Récapitulatif des points importants.
 ====
-Source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms    
+Source du cours "Développez votre site web avec le framework Symfony2" sur le site OpenClassrooms       
 http://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2    
 
-Les Réferences des configs symfony
-https://symfony.com/doc/current/reference/index.html
+Les Réferences des configs symfony       
+https://symfony.com/doc/current/reference/index.html       
 
-Liens de formations à tester
-https://online.parlonscode.com/courses/devenez-un-pro-symfony-3-et-4
+Liens de formations à tester       
+https://online.parlonscode.com/courses/devenez-un-pro-symfony-3-et-4       
+
+Ajouter le cache ACPU dans symfony 4       
+https://symfonycasts.com/screencast/symfony-fundamentals/debug-container-cache-config#play       
+
+Ajouter un systeme de User et de droit sur symfony 4 sans FosUserBundle       
+https://blog.dev-web.io/2018/11/05/symfony-4-gestion-utilisateurs-sans-fosuserbundle-v2018-chapitre-3/       
+
+Ajouter un loger trait        
+https://symfonycasts.com/screencast/symfony-fundamentals/logger-trait#play       
+
+PHPStorm pour Symfony        
+https://symfonycasts.com/screencast/phpstorm/setup           
+
+Créer une extansion twig symfony 4        
+https://symfonycasts.com/screencast/symfony-doctrine/twig-extension#play       
+
+Factorisé les QueryBuilder dans doctrine       
+https://symfonycasts.com/screencast/symfony-doctrine/query-reuse-tricks#play    
+
+Utiliser des fakers pour les fixtures        
+https://symfonycasts.com/screencast/symfony-doctrine/faker-fixtures#play       
 
 ** Logiciels Nécessaires **
 -----
@@ -18,12 +39,19 @@ https://yarnpkg.com/lang/en/docs/install/#windows-stable yarn
 https://nodejs.org/en/download/ nodejs                 
 
 ** Installation symfony Flex **
+----
 ```
 	composer require server --dev
 	composre require profiler --dev
+	composer require maker --dev
+	composer require doctrine/doctrine-fixtures-bundle --dev
+	composer require fzaninotto/faker --dev
 	composer require debug --dev
 	composer unpack debug
-	composer require annotations sec-checker twig asset encore
+	composer require annotations sec-checker twig asset encore doctrine
+	## Bundle pour les times et les slugs et translations
+	composer require knplabs/knp-time-bundle
+	composer require stof/doctrine-extensions-bundle
 	yarn install
 ```
 
