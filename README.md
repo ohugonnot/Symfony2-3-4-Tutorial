@@ -41,18 +41,18 @@ https://nodejs.org/en/download/ nodejs
 ** Installation symfony Flex **
 ----
 ```
-	composer require server --dev
-	composre require profiler --dev
-	composer require maker --dev
-	composer require doctrine/doctrine-fixtures-bundle --dev
-	composer require fzaninotto/faker --dev
-	composer require debug --dev
-	composer unpack debug
-	composer require annotations sec-checker twig asset encore doctrine
-	## Bundle pour les times et les slugs et translations
-	composer require knplabs/knp-time-bundle
-	composer require stof/doctrine-extensions-bundle
-	yarn install
+composer require server --dev
+composre require profiler --dev
+composer require maker --dev
+composer require doctrine/doctrine-fixtures-bundle --dev
+composer require fzaninotto/faker --dev
+composer require debug --dev
+composer unpack debug
+composer require annotations sec-checker twig asset encore doctrine
+## Bundle pour les times et les slugs et translations
+composer require knplabs/knp-time-bundle
+composer require stof/doctrine-extensions-bundle
+yarn install
 ```
 
 
