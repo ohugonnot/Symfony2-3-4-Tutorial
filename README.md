@@ -121,20 +121,20 @@ Un bunble ce nomme :  **ASFolken\NomdubundleBundle**
 ** Routeur ** 
 ----
 ```
-	oc_platform_home:
-	    path:      /{page}
-	    defaults:  { _controller: OCPlatformBundle:Advert:index, page: 1 }
-	    requirements:
-	        page: \d*
-	        
-	   _format    variable reconnue pour l'extension, charge le bon type de header
-	   _locale    variable reconnue pour la langue, charge la bonne translation
-	   _fragment  Used to set the fragment identifier, the optional last part of a URL that starts with a # character                         and is used to identify a portion of a document.
-	   condition : permet de faire des conditions sous forme de requetes (firefox, IE, ect...)
-	   
-	   // pour le debug
-	   php bin/console debug:router [name]             (donne les différents routes ou les infos sur un route)
-	   php bin/console router:match /url/du/routeur    (donne le route d'une url)
+oc_platform_home:
+    path:      /{page}
+    defaults:  { _controller: OCPlatformBundle:Advert:index, page: 1 }
+    requirements:
+	page: \d*
+
+   _format    variable reconnue pour l'extension, charge le bon type de header
+   _locale    variable reconnue pour la langue, charge la bonne translation
+   _fragment  Used to set the fragment identifier, the optional last part of a URL that starts with a # character                         and is used to identify a portion of a document.
+   condition : permet de faire des conditions sous forme de requetes (firefox, IE, ect...)
+
+   // pour le debug
+   php bin/console debug:router [name]             (donne les différents routes ou les infos sur un route)
+   php bin/console router:match /url/du/routeur    (donne le route d'une url)
 ```
 
 - Une route est composée au minimum de deux éléments : l'URL à faire correspondre (son path), et le contrôleur à exécuter (paramètre _controller).     
@@ -151,13 +151,13 @@ http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html
 http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/JsonResponse.html   
 
 ```php
-	$url = $this->generateUrl('oc_platform_home');
-	$this->render('BundleName:Controller:methode.html.twig', array('key' => $val))          
-	$contenu = $this->renderView() recuper le contenu      
-	$this->redirect($url);       
-	
-	// autowire des service dans les controller juste avec le Hint du service
-	php bin/console debug:autowiring
+$url = $this->generateUrl('oc_platform_home');
+$this->render('BundleName:Controller:methode.html.twig', array('key' => $val))          
+$contenu = $this->renderView() recuper le contenu      
+$this->redirect($url);       
+
+// autowire des service dans les controller juste avec le Hint du service
+php bin/console debug:autowiring
 ```
 
 - Le rôle du contrôleur est de retourner un objet Response : ceci est obligatoire !       
@@ -172,38 +172,38 @@ http://twig.sensiolabs.org/doc/filters/index.html
 http://alexandre.clain.info/twig-les-variables-globales/      
 
 ```twig
-	{% dump(var) %}
-	{% set %}
-	{{ app.request }} {# La requête « request » qu'on a vu au chapitre précédent sur les contrôleurs. #}
-	{{ app.session }}  {# Le service « session » qu'on a vu également au chapitre précédent. #}
-	{{ app.environment }} {# L'environnement courant : « dev », « prod », et ceux que vous avez définis. #}
-	{{ app.debug }} {# True si le mode debug est activé, False sinon. #}
-	{{ app.security }} {# Le service « security », que nous verrons plus loin dans ce cours. #}
-	{{ app.user }} {# L'utilisateur courant, que nous verrons également plus loin dans ce cours. #}
-	href="{{ path('oc_platform_view', { 'id': advert_id }) }}"
-	
-	{% if var is defined %} … {% endif %}
-	{% for valeur, option in liste_options %} ... {% else %}{% endfor %} // Possible de mettre un else quand le array est vide
-	{% block nom_du_block %}{% endblock %}
-	{% extends "OCPlatformBundle::layout.html.twig" %}       {# quand le template herite d'un autre #}
-	{{ render(controller("OCPlatformBundle:Advert:menu")) }} {# pour une partie variable qui depend d'un controller #}
-	{{ include("OCPlatformBundle:Advert:form.html.twig") }}  {# pour une partie fixe #}
-	
-	{{ loop.index }} {#Le numéro de l'itération courante (en commençant par 1). #}
-	{{ loop.index0 }} {# Le numéro de l'itération courante (en commençant par 0). #}
-	{{ loop.revindex }} {# Le nombre d'itérations restantes avant la fin de la boucle (en finissant par 1). #}
-	{{ loop.revindex0 }} {# Le nombre d'itérations restantes avant la fin de la boucle (en finissant par 0). #}
-	{{ loop.first }} {# true si c'est la première itération, false sinon. #}
-	{{ loop.last }} {# true si c'est la dernière itération, false sinon. #}
-	{{ loop.length }} {# Le nombre total d'itérations dans la boucle. #}
+{% dump(var) %}
+{% set %}
+{{ app.request }} {# La requête « request » qu'on a vu au chapitre précédent sur les contrôleurs. #}
+{{ app.session }}  {# Le service « session » qu'on a vu également au chapitre précédent. #}
+{{ app.environment }} {# L'environnement courant : « dev », « prod », et ceux que vous avez définis. #}
+{{ app.debug }} {# True si le mode debug est activé, False sinon. #}
+{{ app.security }} {# Le service « security », que nous verrons plus loin dans ce cours. #}
+{{ app.user }} {# L'utilisateur courant, que nous verrons également plus loin dans ce cours. #}
+href="{{ path('oc_platform_view', { 'id': advert_id }) }}"
 
-	{{ var|upper }}
-	{{ var|striptags }}
-	{{ date|date('d/m/Y') }}
-	Date d'aujourd'hui : {{ "now"|date('d/m/Y') }}
-	{{ "Il y a %s pommes et %s poires"|format(153, nb_poires) }}
-	Longueur de la variable : {{ texte|length }}
-	Nombre d'éléments du tableau : {{ tableau|length }}
+{% if var is defined %} … {% endif %}
+{% for valeur, option in liste_options %} ... {% else %}{% endfor %} // Possible de mettre un else quand le array est vide
+{% block nom_du_block %}{% endblock %}
+{% extends "OCPlatformBundle::layout.html.twig" %}       {# quand le template herite d'un autre #}
+{{ render(controller("OCPlatformBundle:Advert:menu")) }} {# pour une partie variable qui depend d'un controller #}
+{{ include("OCPlatformBundle:Advert:form.html.twig") }}  {# pour une partie fixe #}
+
+{{ loop.index }} {#Le numéro de l'itération courante (en commençant par 1). #}
+{{ loop.index0 }} {# Le numéro de l'itération courante (en commençant par 0). #}
+{{ loop.revindex }} {# Le nombre d'itérations restantes avant la fin de la boucle (en finissant par 1). #}
+{{ loop.revindex0 }} {# Le nombre d'itérations restantes avant la fin de la boucle (en finissant par 0). #}
+{{ loop.first }} {# true si c'est la première itération, false sinon. #}
+{{ loop.last }} {# true si c'est la dernière itération, false sinon. #}
+{{ loop.length }} {# Le nombre total d'itérations dans la boucle. #}
+
+{{ var|upper }}
+{{ var|striptags }}
+{{ date|date('d/m/Y') }}
+Date d'aujourd'hui : {{ "now"|date('d/m/Y') }}
+{{ "Il y a %s pommes et %s poires"|format(153, nb_poires) }}
+Longueur de la variable : {{ texte|length }}
+Nombre d'éléments du tableau : {{ tableau|length }}
 ```
 
 - Un moteur de templates tel que Twig permet de bien séparer le code PHP du code HTML, dans le cadre de l'architecture MVC ;
@@ -224,18 +224,18 @@ http://alexandre.clain.info/twig-les-variables-globales/
 http://openclassrooms.com/informatique/cours/introduction-a-l-injection-de-dependances-en-php
 
 ```php
-	$this->get("nom du service")
-	$this->container->get('nomduservice')
-	
-	// Pour avoir la liste des services disponible
-	php bin/console debug:container
-	// Pour connaitre tous les service avec autowiring
-	php bin/console debug:autowiring
-	
-	services:
-		oc_platform.antispam:
-			class: OC\PlatformBundle\Antispam\OCAntispa
-			arguments: [@mailer, %locale%, 50]
+$this->get("nom du service")
+$this->container->get('nomduservice')
+
+// Pour avoir la liste des services disponible
+php bin/console debug:container
+// Pour connaitre tous les service avec autowiring
+php bin/console debug:autowiring
+
+services:
+	oc_platform.antispam:
+		class: OC\PlatformBundle\Antispam\OCAntispa
+		arguments: [@mailer, %locale%, 50]
 ```
 
 - Un service est une simple classe associée à une certaine configuration.   
@@ -288,40 +288,40 @@ http://www.doctrine-project.org/api/orm/2.1/class-Doctrine.ORM.EntityManager.htm
 3 étapes, Doctrine -> Manager -> Repository    
 
 ```php
-	$doctrine = $this->getDoctrine(); ou $doctrine = $this->get("doctrine");
-	$em = $this->getDoctrine()->getManager();    // Pour appeler le Manager d'entité
-	$advertRepository = $em->getRepository('OCPlatformBundle:Advert');
+$doctrine = $this->getDoctrine(); ou $doctrine = $this->get("doctrine");
+$em = $this->getDoctrine()->getManager();    // Pour appeler le Manager d'entité
+$advertRepository = $em->getRepository('OCPlatformBundle:Advert');
 ```
 
 Exemple d'utilisation	
 
 ```php	
-	$em = $this->getDoctrine()->getManager();
-	
-	// On crée une nouvelle annonce
-	$advert1 = new Advert;
-	$advert1->setTitle('Recherche développeur.');
-	$advert1->setContent("Pour mission courte");
-	// Et on le persiste
-	$em->persist($advert1);
-	
-	// On récupère l'annonce d'id 5. On n'a pas encore vu cette méthode find(),
-	// mais elle est simple à comprendre. Pas de panique, on la voit en détail
-	// dans un prochain chapitre dédié aux repositories
-	$advert2 = $em->getRepository('OCPlatformBundle:Advert')->find(5);
-	
-	// On modifie cette annonce, en changeant la date à la date d'aujourd'hui
-	$advert2->setDate(new \Datetime());
-	
-	// Ici, pas besoin de faire un persist() sur $advert2. En effet, comme on a
-	// récupéré cette annonce via Doctrine, il sait déjà qu'il doit gérer cette
-	// entité. Rappelez-vous, un persist ne sert qu'à donner la responsabilité
-	// de l'objet à Doctrine.
-	
-	// Enfin, on applique les deux changements à la base de données :
-	// Un INSERT INTO pour ajouter $advert1
-	// Et un UPDATE pour mettre à jour la date de $advert2
-	$em->flush();
+$em = $this->getDoctrine()->getManager();
+
+// On crée une nouvelle annonce
+$advert1 = new Advert;
+$advert1->setTitle('Recherche développeur.');
+$advert1->setContent("Pour mission courte");
+// Et on le persiste
+$em->persist($advert1);
+
+// On récupère l'annonce d'id 5. On n'a pas encore vu cette méthode find(),
+// mais elle est simple à comprendre. Pas de panique, on la voit en détail
+// dans un prochain chapitre dédié aux repositories
+$advert2 = $em->getRepository('OCPlatformBundle:Advert')->find(5);
+
+// On modifie cette annonce, en changeant la date à la date d'aujourd'hui
+$advert2->setDate(new \Datetime());
+
+// Ici, pas besoin de faire un persist() sur $advert2. En effet, comme on a
+// récupéré cette annonce via Doctrine, il sait déjà qu'il doit gérer cette
+// entité. Rappelez-vous, un persist ne sert qu'à donner la responsabilité
+// de l'objet à Doctrine.
+
+// Enfin, on applique les deux changements à la base de données :
+// Un INSERT INTO pour ajouter $advert1
+// Et un UPDATE pour mettre à jour la date de $advert2
+$em->flush();
 ```
 
 - Le rôle d'un ORM est de se charger de la persistance de vos données : vous manipulez des objets, et lui s'occupe de les enregistrer en base de données.    
@@ -333,42 +333,42 @@ Exemple d'utilisation
 **clear($nomEntite)** annule tous les persist() effectués.   
 
 ```php	
-	$em->persist($advert);
-	$em->persist($comment);
-	$em->clear();
-	$em->flush(); // N'exécutera rien, car les deux persists sont annulés par le clear
+$em->persist($advert);
+$em->persist($comment);
+$em->clear();
+$em->flush(); // N'exécutera rien, car les deux persists sont annulés par le clear
 ```	
 
 **detach($entite)** annule le persist() effectué sur l'entité en argument.
 
 ```php	
-	$em->persist($advert);
-	$em->persist($comment);
-	$em->detach($advert);
-	$em->flush(); // Enregistre $comment mais pas $advert
+$em->persist($advert);
+$em->persist($comment);
+$em->detach($advert);
+$em->flush(); // Enregistre $comment mais pas $advert
 ```
 
 **contains($entite)** retourne true si l'entité donnée en argument est gérée par l'EntityManager      
 
 ```php	
-	$em->persist($advert);
-	var_dump($em->contains($advert)); // Affiche true
-	var_dump($em->contains($comment)); // Affiche false
+$em->persist($advert);
+var_dump($em->contains($advert)); // Affiche true
+var_dump($em->contains($comment)); // Affiche false
 ```
 
 **refresh($entite)** met à jour l'entité donnée en argument dans l'état où elle est en base de données.       
 
 ```php	
-	$advert->setTitle('Un nouveau titre');
-	$em->refresh($advert);
-	var_dump($advert->getTitle()); // Affiche « Un ancien titre » 
+$advert->setTitle('Un nouveau titre');
+$em->refresh($advert);
+var_dump($advert->getTitle()); // Affiche « Un ancien titre » 
 ```	
   
 **remove($entite)** supprime l'entité donnée en argument de la base de données. Effectif au prochain flush().  
 
 ```php	
-	$em->remove($advert);
-	$em->flush(); // Exécute un DELETE sur $advert
+$em->remove($advert);
+$em->flush(); // Exécute un DELETE sur $advert
 ```
 
 ** Les différents Types de liaisons **
@@ -381,11 +381,11 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 **Les relations 1-1**
 
 ```php	
-	/**
-	* @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist"})   Créer la relation
-	* @ORM\JoinColumn(nullable=false)    Rendre la relation obligatoire 
-	* */
-	private $image;
+/**
+* @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist"})   Créer la relation
+* @ORM\JoinColumn(nullable=false)    Rendre la relation obligatoire 
+* */
+private $image;
 ```	
 
 - On choisit le proprietaire en fonction de la logique de l'application proprietaire -> inverse
@@ -393,11 +393,11 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 **Les relations Many(n)-1**
 
 ```php	
-	 /**
-	 * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert",  fetch="EXTRA_LAZY") // Extra_lazy permet de charger les collections en lazy loading
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	 private $advert;
+ /**
+ * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert",  fetch="EXTRA_LAZY") // Extra_lazy permet de charger les collections en lazy loading
+ * @ORM\JoinColumn(nullable=false)
+ */
+ private $advert;
 ```
 
 -  C'est le côté Many d'une relation Many-To-One qui est le propriétaire
@@ -405,13 +405,13 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 **Les relations Many(n)-Many(n)**
 
 ```php
-	class Advert
-	{
-	  /**
-	   * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Category", cascade={"persist"})
-	   */
-	  private $categories;
-	}
+class Advert
+{
+  /**
+   * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Category", cascade={"persist"})
+   */
+  private $categories;
+}
 ```	
 
 - On choisit le proprietaire en fonction de la logique de l'application proprietaire -> inverse
@@ -422,18 +422,18 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 **Relation Many-To-Many avec attributs**
 
 ```php	
-	Advert One-To-Many AdvertSkill Many-To-One Skill.
-	 /**
-	   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert")
-	   * @ORM\JoinColumn(nullable=false)
-	   */
-	  private $advert;
-	
-	  /**
-	   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Skill")
-	   * @ORM\JoinColumn(nullable=false)
-	   */
-	  private $skill;
+Advert One-To-Many AdvertSkill Many-To-One Skill.
+ /**
+   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $advert;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Skill")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $skill;
 ```
 
 - Comme les côtés Many des deux relations Many-To-One sont dans AdvertSkill, cette entité est l'entité propriétaire des deux relations.
@@ -442,38 +442,38 @@ La notion de propriétaire et d'inverse est abstraite mais importante à compren
 Ajouter une relation OneToMany dans l'entité inverse avec un mappedBy
 
 ```php	
-	class Advert
-	{
-	  /**
-	   * @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Application", mappedBy="advert")
-	   */
-	  private $applications; // Notez le « s », une annonce est liée à plusieurs candidatures
-	}
+class Advert
+{
+  /**
+   * @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Application", mappedBy="advert")
+   */
+  private $applications; // Notez le « s », une annonce est liée à plusieurs candidatures
+}
 ```
 
 Modifier l'entité proprietaire avec un inversedBy      
 
 ```php	
-	class Application
-	{
-	  /**
-	   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", inversedBy="applications")
-	   * @ORM\JoinColumn(nullable=false)
-	   */
-	  private $advert;
-	}
+class Application
+{
+  /**
+   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert", inversedBy="applications")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $advert;
+}
 ```
 
 On modifie un des cotés de la retion pour gérer la dépenace, et on ce sert ensuite de ce setteur pour appelé      
 
 ```php
-	  public function addApplication(Application $application)
-	  {
-	    $this->applications[] = $application;
-	    // On lie l'annonce à la candidature
-	    $application->setAdvert($this);
-	    return $this;
-	  }
+  public function addApplication(Application $application)
+  {
+    $this->applications[] = $application;
+    // On lie l'annonce à la candidature
+    $application->setAdvert($this);
+    return $this;
+  }
 ```
 
 - Les relations Doctrine révèlent toute la puissance de l'ORM.      
@@ -486,45 +486,45 @@ https://github.com/doctrine/doctrine2/blob/master/lib/Doctrine/ORM/EntityReposit
 **La méthode find($id)** récupère tout simplement l'entité correspondant à l'id $id. Dans le cas de notre AdvertRepository, elle retourne une instance d'Advert. Exemple :      
 
 ```php	
-	$repository = $this
-	  ->getDoctrine()
-	  ->getManager()
-	  ->getRepository('OCPlatformBundle:Advert');
-	
-	$advert = $repository->find(5);
+$repository = $this
+  ->getDoctrine()
+  ->getManager()
+  ->getRepository('OCPlatformBundle:Advert');
+
+$advert = $repository->find(5);
 ```
 
 **La méthode findAll()** retourne toutes les entités contenue dans la base de données. Le format du retour est un simple Array, que vous pouvez parcourir (avec un foreach par exemple) pour utiliser les objets qu'il contient.      
 
 ```php	
-	$listAdverts = $repository->findAll();
-	
-	foreach ($listAdverts as $advert) {
-	  // $advert est une instance de Advert
-	  echo $advert->getContent();
-	}
+$listAdverts = $repository->findAll();
+
+foreach ($listAdverts as $advert) {
+  // $advert est une instance de Advert
+  echo $advert->getContent();
+}
 ```	
 
 **La méthode findBy()** est un peu plus intéressante. Comme findAll(), elle permet de retourner une liste d'entités, sauf qu'elle est capable d'effectuer un filtre pour ne retourner que les entités correspondant à un ou plusieurs critère(s)      
 
 ```php
-	$repository->findBy(
-	  array $criteria,
-	  array $orderBy = null,
-	  $limit  = null,
-	  $offset = null
+$repository->findBy(
+  array $criteria,
+  array $orderBy = null,
+  $limit  = null,
+  $offset = null
 
-	$listAdverts = $repository->findBy(
-	  array('author' => 'Alexandre'), // Critere
-	  array('date' => 'desc'),        // Tri
-	  5,                              // Limite
-	  0                               // Offset
-	);
+$listAdverts = $repository->findBy(
+  array('author' => 'Alexandre'), // Critere
+  array('date' => 'desc'),        // Tri
+  5,                              // Limite
+  0                               // Offset
+);
 
-	foreach ($listAdverts as $advert) {
-	  // $advert est une instance de Advert
-	 echo $advert->getContent();
-	}
+foreach ($listAdverts as $advert) {
+  // $advert est une instance de Advert
+ echo $advert->getContent();
+}
 ```
 
 **La méthode findOneBy(array $criteria)** fonctionne sur le même principe que la méthode findBy(), sauf qu'elle ne retourne qu'une seule entité. Les arguments orderBy, limit et offset n'existent donc pas.      
@@ -543,30 +543,30 @@ https://github.com/doctrine/doctrine2/blob/master/lib/Doctrine/ORM/EntityReposit
 http://www.doctrine-project.org/docs/orm/2.1/en/reference/query-builder.html
 
 ```php	
-	public function myFindAll()
-		{
-		  return $this
-		    ->createQueryBuilder('a')
-		    ->getQuery()
-		    ->getResult();
-		}
-
-	public function findByAuthorAndDate($author, $year)
+public function myFindAll()
 	{
-	  $qb = $this->createQueryBuilder('a');
-	  
-	  $qb->where('a.author = :author')
-	       ->setParameter('author', $author)
-	     ->andWhere('a.date < :year')
-	       ->setParameter('year', $year)
-	     ->orderBy('a.date', 'DESC')
-	  ;
-	
-	  return $qb
+	  return $this
+	    ->createQueryBuilder('a')
 	    ->getQuery()
-	    ->getResult()
-	  ;
+	    ->getResult();
 	}
+
+public function findByAuthorAndDate($author, $year)
+{
+  $qb = $this->createQueryBuilder('a');
+
+  $qb->where('a.author = :author')
+       ->setParameter('author', $author)
+     ->andWhere('a.date < :year')
+       ->setParameter('year', $year)
+     ->orderBy('a.date', 'DESC')
+  ;
+
+  return $qb
+    ->getQuery()
+    ->getResult()
+  ;
+}
 ```
 
 - Le rôle d'un repository est, à l'aide du langage DQL ou du constructeur de requêtes, de récupérer des entités selon des contraintes, des tris, etc.      
@@ -581,21 +581,21 @@ http://www.doctrine-project.org/docs/orm/2.1/en/reference/query-builder.html
 **Définir l'entité comme contenant des callbacks**      
 
 ```php	
-	/**
-	 * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\AdvertRepository")
-	 * @ORM\HasLifecycleCallbacks()
-	 */
-	class Advert
-	{
+/**
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Advert
+{
 ```
 
 **Définir un callback et ses évènements associés**      
 
 ```php
-	/**
-	 * @ORM\PreUpdate
-	 */
-	public function updateDate()
+/**
+ * @ORM\PreUpdate
+ */
+public function updateDate()
 ```
 
 **PrePersist**      
@@ -633,44 +633,44 @@ https://symfony.com/doc/3.4/form/dynamic_form_modification.html#form-events-unde
 https://symfony.com/doc/3.4/form/form_customization.html << customisation twig form     
       
 ```php
-	php bin/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
+php bin/console doctrine:generate:form OCPlatformBundle:Advert  creer un formtype
 
-	 $task = new Task();
+ $task = new Task();
 
-	    $form = $this->createFormBuilder($task)
-		->add('task', TextType::class)
-		->add('dueDate', DateType::class)
-		->add('save', SubmitType::class, array('label' => 'Create Task'))
-		->getForm();
+    $form = $this->createFormBuilder($task)
+	->add('task', TextType::class)
+	->add('dueDate', DateType::class)
+	->add('save', SubmitType::class, array('label' => 'Create Task'))
+	->getForm();
 
-	    $form->handleRequest($request);
+    $form->handleRequest($request);
 
-	    if ($form->isSubmitted() && $form->isValid()) {
-		// $form->getData() holds the submitted values
-		// but, the original `$task` variable has also been updated
-		$task = $form->getData();
+    if ($form->isSubmitted() && $form->isValid()) {
+	// $form->getData() holds the submitted values
+	// but, the original `$task` variable has also been updated
+	$task = $form->getData();
 
-		// ... perform some action, such as saving the task to the database
-		// for example, if Task is a Doctrine entity, save it!
-		// $em = $this->getDoctrine()->getManager();
-		// $em->persist($task);
-		// $em->flush();
+	// ... perform some action, such as saving the task to the database
+	// for example, if Task is a Doctrine entity, save it!
+	// $em = $this->getDoctrine()->getManager();
+	// $em->persist($task);
+	// $em->flush();
 
-		return $this->redirectToRoute('task_success');
-	    }
+	return $this->redirectToRoute('task_success');
+    }
 
-	    // On passe la méthode createView() du formulaire à la vue
-	    // afin qu'elle puisse afficher le formulaire toute seule
-	    return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
-	      'form' => $form->createView(),
-	    ));
-	    
-	    // In twig
-	    {{ form(form, {'method': 'GET'}) 
-	    {{ form_row(form.submit, { 'label': 'Submit me' }) }}
-	    {{ form_end(form, {'render_rest': false}) }}
-	    // desactivate html5 required
-	    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    // On passe la méthode createView() du formulaire à la vue
+    // afin qu'elle puisse afficher le formulaire toute seule
+    return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
+      'form' => $form->createView(),
+    ));
+
+    // In twig
+    {{ form(form, {'method': 'GET'}) 
+    {{ form_row(form.submit, { 'label': 'Submit me' }) }}
+    {{ form_end(form, {'render_rest': false}) }}
+    // desactivate html5 required
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
 ```
 
 http://symfony.com/fr/doc/current/reference/forms/types/      
@@ -734,46 +734,46 @@ affiche la balise de fermeture du formulaire HTML, soit </form>.
 http://symfony.com/doc/current/cookbook/form/dynamic_form_modification.htm	
 
 ```php	
-	namespace OC\PlatformBundle\Form;
-	
-	use Symfony\Component\Form\AbstractType;
-	use Symfony\Component\Form\FormBuilderInterface;
-	// N'oubliez pas ces deux use !
-	use Symfony\Component\Form\FormEvent;
-	use Symfony\Component\Form\FormEvents;
-	use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-	
-	class AdvertType extends AbstractType
-	{
-	  public function buildForm(FormBuilderInterface $builder, array $options)
-	  {
-	    // Ajoutez ici tous vos champs sauf le champ published
-	    $builder = ...;
-	
-	    // On ajoute une fonction qui va écouter un évènement
-	    $builder->addEventListener(
-	      FormEvents::PRE_SET_DATA,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
-	      function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
-	        // On récupère notre objet Advert sous-jacent
-	        $advert = $event->getData();
-	
-	        // Cette condition est importante, on en reparle plus loin
-	        if (null === $advert) {
-	          return; // On sort de la fonction sans rien faire lorsque $advert vaut null
-	        }
-	
-	        if (!$advert->getPublished() || null === $advert->getId()) {
-	          // Si l'annonce n'est pas publiée, ou si elle n'existe pas encore en base (id est null),
-	          // alors on ajoute le champ published
-	          $event->getForm()->add('published', 'checkbox', array('required' => false));
-	        } else {
-	          // Sinon, on le supprime
-	          $event->getForm()->remove('published');
-	        }
-	      }
-	    );
-	  }
+namespace OC\PlatformBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+// N'oubliez pas ces deux use !
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+class AdvertType extends AbstractType
+{
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+    // Ajoutez ici tous vos champs sauf le champ published
+    $builder = ...;
+
+    // On ajoute une fonction qui va écouter un évènement
+    $builder->addEventListener(
+      FormEvents::PRE_SET_DATA,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
+      function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
+	// On récupère notre objet Advert sous-jacent
+	$advert = $event->getData();
+
+	// Cette condition est importante, on en reparle plus loin
+	if (null === $advert) {
+	  return; // On sort de la fonction sans rien faire lorsque $advert vaut null
 	}
+
+	if (!$advert->getPublished() || null === $advert->getId()) {
+	  // Si l'annonce n'est pas publiée, ou si elle n'existe pas encore en base (id est null),
+	  // alors on ajoute le champ published
+	  $event->getForm()->add('published', 'checkbox', array('required' => false));
+	} else {
+	  // Sinon, on le supprime
+	  $event->getForm()->remove('published');
+	}
+      }
+    );
+  }
+}
 ```
 
 - Un formulaire se construit sur un objet existant, et son objectif est d'hydrater cet objet.               
@@ -808,15 +808,15 @@ http://symfony.com/fr/doc/current/reference/constraints.html
 
 ```
 // ...
-	use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-	/**
-	 * @Security("has_role('ROLE_ADMIN')")
-	 */
-	public function helloAction($name)
-	{
-	    // ...
-	}
+/**
+ * @Security("has_role('ROLE_ADMIN')")
+ */
+public function helloAction($name)
+{
+    // ...
+}
 ```
 
 ** Assetic **
