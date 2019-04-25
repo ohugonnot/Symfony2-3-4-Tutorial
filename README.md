@@ -43,17 +43,22 @@ https://nodejs.org/en/download/ nodejs
 ```
 composer require --dev server
 composre require --dev profiler
-composer require --dev maker 
+composer require --dev symfony/maker-bundle 
 composer require --dev doctrine/doctrine-fixtures-bundle
 composer require --dev fzaninotto/faker
 composer require --dev symfony/phpunit-bridge
 composer require --dev debug
 composer unpack debug
-composer require annotations sec-checker twig asset encore doctrine symfony/translation
+composer require annotations sec-checker twig asset encore symfony/orm-pack symfony/translation serializer admin
+## installer la compilation d'assets
+yarn install
+
 ## Bundle pour les times et les slugs et translations
 composer require knplabs/knp-time-bundle
 composer require stof/doctrine-extensions-bundle
-yarn install
+
+## Installer API Plateform
+composer require api
 ```
 
 
