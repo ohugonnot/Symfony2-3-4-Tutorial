@@ -42,7 +42,7 @@ https://nodejs.org/en/download/ nodejs
 ----
 ```
 composer require --dev server
-composre require --dev profiler
+composer require --dev symfony/profiler-pack
 composer require --dev symfony/maker-bundle 
 composer require --dev doctrine/doctrine-fixtures-bundle
 composer require --dev fzaninotto/faker
